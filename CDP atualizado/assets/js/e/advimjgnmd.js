@@ -1752,6 +1752,12 @@ function select_status_filter(event){
   window.location.replace(href.toString());
 }
 
+function select_contas_filter(event){
+  var href = new URL(window.location.href);
+  href.searchParams.set('name', $(event.target).val());
+  window.location.replace(href.toString());
+}
+
 function read_file_RET(input){
   const reader = new FileReader();
   const ret = input.files[0];
