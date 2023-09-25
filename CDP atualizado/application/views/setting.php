@@ -162,9 +162,14 @@
                                 </thead>
                                 <tbody>
                                     <?php $table_data = $method->select_payments(
-                                        filter_input(INPUT_GET, 'year_mouth'),filter_input(INPUT_GET, 'income'),
-                                        filter_input(INPUT_GET, 'client'),filter_input(INPUT_GET, 'account'),filter_input(INPUT_GET, 'status'),
-                                        filter_input(INPUT_GET, 'date_init'), filter_input(INPUT_GET, 'date_end') );?>
+                                        filter_input(INPUT_GET, 'year_mouth'),
+                                        filter_input(INPUT_GET, 'income'),
+                                        filter_input(INPUT_GET, 'client'),
+                                        filter_input(INPUT_GET, 'account'),
+                                        filter_input(INPUT_GET, 'status'),
+                                        filter_input(INPUT_GET, 'name'),
+                                        filter_input(INPUT_GET, 'date_init'),
+                                        filter_input(INPUT_GET, 'date_end') );?>
                                      <?php if(!empty($table_data)) : ?>
                                         <?php foreach ($table_data as $key => $value): ?>
                                             <tr class="<?php echo $value->before_today; ?>" id="<?php echo $value->id ?>">
@@ -568,9 +573,14 @@
                                 </thead>
                                 <tbody>
                                     <?php $table_data = $method->select_payments(
-                                        filter_input(INPUT_GET, 'year_mouth'),filter_input(INPUT_GET, 'income'),
-                                        filter_input(INPUT_GET, 'client'),filter_input(INPUT_GET, 'account'),filter_input(INPUT_GET, 'status'),
-                                        filter_input(INPUT_GET, 'date_init'), filter_input(INPUT_GET, 'date_end') );?>
+                                        filter_input(INPUT_GET, 'year_mouth'),
+                                        filter_input(INPUT_GET, 'income'),
+                                        filter_input(INPUT_GET, 'client'),
+                                        filter_input(INPUT_GET, 'account'),
+                                        filter_input(INPUT_GET, 'status'),
+                                        filter_input(INPUT_GET, 'name'),
+                                        filter_input(INPUT_GET, 'date_init'),
+                                        filter_input(INPUT_GET, 'date_end') );?>
                                      <?php if(!empty($table_data)) : ?>
                                         <?php foreach ($table_data as $key => $value): ?>
                                             <tr class="<?php echo $value->before_today; ?>" id="<?php echo $value->id ?>">

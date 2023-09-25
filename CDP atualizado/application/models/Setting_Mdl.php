@@ -523,7 +523,7 @@ class Setting_Mdl extends CI_Model {
         $this->db->trans_complete();
     }
     
-    public function select_payments($date = NULL, $income = NULL, $client = NULL, $account = NULL, $status = NULL, $date_init = NULL, $date_end = NULL){
+    public function select_payments($date = NULL, $income = NULL, $client = NULL, $account = NULL, $status = NULL, $name = NULL, $date_init = NULL, $date_end = NULL){
         if(!isset($date) && !isset($date_init) && !isset($date_init)){
             $date_mouth = date("Y-m");
         }else{
@@ -549,6 +549,10 @@ class Setting_Mdl extends CI_Model {
             $status = "AND pd.status = $status";
         }
 
+        if ($name != NULL){
+            $name = "AND account.name = '$name'";
+        }
+
         $date_selected = NULL;
         if ($date_end != NULL && $date_init != NULL){
             $date_selected = "AND pd.parcel_date BETWEEN '$date_init' AND '$date_end'";
@@ -565,7 +569,7 @@ class Setting_Mdl extends CI_Model {
         LEFT JOIN account on p.id_account = account.id
         JOIN payment_status on pd.status = payment_status.code
          WHERE pd.parcel_date LIKE 
-        '%$date_mouth%' $income $client $account $status $date_selected ORDER BY pd.parcel_date;";
+        '%$date_mouth%' $income $client $account $status $name $date_selected ORDER BY pd.parcel_date;";
 
 
 
