@@ -1007,7 +1007,10 @@ class Setting_Mdl extends CI_Model {
             ORDER BY year,month
         ) t5 ON t1.month = t5.month
         LEFT JOIN (
-            SELECT MONTH(insert_date) as month, YEAR(insert_date) AS year, sum(cash) as balcony_value 
+            SELECT 
+            MONTH(insert_date) as month, 
+            YEAR(insert_date) AS year, 
+            sum(cash) + sum(pix) + sum(card) as balcony_value 
             FROM balcony_values 
             GROUP BY MONTH(insert_date)
         ) t6 ON t1.month = t6.month ORDER BY year,month";
