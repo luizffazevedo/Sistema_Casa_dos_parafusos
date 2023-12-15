@@ -63,7 +63,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-background-image: url('<?php echo base_url('assets/images/background_logo.png'); ?>');
+background-image: url('<?php echo base_url('assets/images/Background_Sistema_CDP'); ?>');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
