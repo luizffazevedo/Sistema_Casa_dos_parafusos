@@ -210,8 +210,9 @@ class Setting extends MY_Controller {
 
     public function getNote(){
         $number = $_GET['number'];
-        if (!empty($number)){
-            return $this->setting_mdl->getNote($number);
+        $emiter = $_GET['emiter'];
+        if (!(empty($number) && empty($emiter))){
+            return $this->setting_mdl->getNote($number, $emiter);
         }
     }
 

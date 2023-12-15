@@ -1853,13 +1853,15 @@ function preencherModalRET(ret){
   }
 }
 
-function fillModalEditNote(number){
+function fillModalEditNote(number, emiter){
   number = number ? number : $("#number_edit").val();
+  emiter = emiter ? emiter : $("#emiter_edit").val();
   $("#number_edit").val(number);
+  $("#emiter_edit").val(emiter);
   $("#payment_div_edit").html('');  
 
   $.get({
-    url: "setting/getNote?number=" + number,
+    url: "setting/getNote?number=" + number + "&emiter=" + emiter,
     dataType: "text",
     success: function (data) {
       if (data){
