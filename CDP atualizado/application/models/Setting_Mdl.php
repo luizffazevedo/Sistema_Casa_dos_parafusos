@@ -730,13 +730,28 @@ class Setting_Mdl extends CI_Model {
         }
     }
     
-    public function getNote($number=NULL){
-        $select = "SELECT payment.id as note_id, payment_date.id as payment_id, payment_date.parcel_date, payment_date.parcel_value,
-        payment.destine, payment.emiter, payment.id_account, payment_method.name as method,
-        payment.observation, payment_status.name as status_name, income FROM payment JOIN payment_date ON payment.id = payment_date.id_payment
-        left join payment_method on payment.method = payment_method.code
-        join payment_status on payment_date.status = payment_status.code
-        AND payment.number = $number";
+    public function getNote($number=NULL, $emiter=NULL){
+        $select = 
+        "SELECT payment.id as note_id,
+        payment_date.id as payment_id,
+        payment_date.parcel_date,
+        payment_date.parcel_value,
+        payment.destine, 
+        payment.emiter, 
+        payment.id_account, 
+        payment_method.name as method,
+        payment.observation, 
+        payment_status.name as status_name,
+        income 
+        FROM payment 
+        JOIN payment_date 
+            ON payment.id = payment_date.id_payment
+        left join payment_method 
+            on payment.method = payment_method.code
+        join payment_status 
+            on payment_date.status = payment_status.code
+            AND payment.number = $number
+        where payment.emiter LIKE '$emiter%'";
         $result = $this->db->query($select)->result();
         if ((count($result)) >= 1) {
             print_r(json_encode($result));
@@ -1008,12 +1023,15 @@ class Setting_Mdl extends CI_Model {
         ) t5 ON t1.month = t5.month
         LEFT JOIN (
             SELECT 
-            MONTH(insert_date) as month, 
-            YEAR(insert_date) AS year, 
+            MONTH(insert_date) as month,
+            YEAR(insert_date) AS year,
             sum(cash) + sum(pix) + sum(card) as balcony_value 
             FROM balcony_values 
             GROUP BY MONTH(insert_date)
-        ) t6 ON t1.month = t6.month ORDER BY year,month";
+        ) t6 ON t1.month = t6.month 
+        ORDER BY 
+        year,
+        month";
         return $this->db->query($select_query)->result();
     }
 

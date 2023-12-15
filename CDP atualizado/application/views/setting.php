@@ -369,7 +369,7 @@
                                     <div class="form-group">
                                     <label for=""><b >Número da nota:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input onblur="fillModalEditNote('')" id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
+                                            <input id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
                                             <input id="payment_id_edit" placeholder="Número do pagamento FK" type="text" name="" class="form-control" value="" hidden>
                                             <input id="payment_note_id_edit" placeholder="Número da nota FK" type="text" name="note_id_edit" class="form-control" value="" hidden>
                                         </div>
@@ -377,7 +377,7 @@
                                     <div class="form-group">
                                         <label for=""><b >Emissor:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input id="emiter_edit" type="text" name="emiter" class="form-control" value="">
+                                            <input onblur="fillModalEditNote('', '')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -731,13 +731,13 @@
                                     <div class="form-group">
                                     <label for=""><b >Número da nota:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input onblur="fillModalEditNote('')" id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
+                                            <input id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
                                         </div>
                                     </div>    
                                     <div class="form-group">
                                         <label for=""><b >Emissor:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input id="emiter_edit" type="text" name="emiter" class="form-control" value="">
+                                            <input onblur="fillModalEditNote('', '')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -887,13 +887,13 @@
                                     <div class="form-group">
                                     <label for=""><b >Número da nota:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input onblur="fillModalEditNote('')" id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
+                                            <input id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
                                         </div>
                                     </div>    
                                     <div class="form-group">
                                         <label for=""><b >Emissor:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input id="emiter_edit" type="text" name="emiter" class="form-control" value="">
+                                            <input onblur="fillModalEditNote('', '')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
