@@ -50,5 +50,12 @@ class Signin_Mdl extends CI_Model {
         $this->db->insert('wp_users', $data);
     }
 
+    public function update_password_user($email, $hashed_password) {
+        if ((!empty($email)) && (!empty($hashed_password))) {
+            $update = "UPDATE wp_users SET user_pass = '{$hashed_password}' WHERE user_email = '{$email}'";
+            $this->db->query($update);
+        }
+    }
+
     // --------------------------------------------------------------------
 }

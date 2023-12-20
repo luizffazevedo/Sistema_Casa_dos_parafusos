@@ -105,45 +105,14 @@ class Signin extends MY_Controller {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $this->signin_mdl->create_user($email, $hashed_password, $name);
 
-        $email = 'zito@casadosparafusosvr.com.br';
-        $password = 'Zito_3101';
-        $name = 'Zito';
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $this->signin_mdl->create_user($email, $hashed_password, $name);
+    }
 
-        //
+    public function update_password_user($email_user, $password_new) {
+        $email = $email_user;
+        $hashed_password = password_hash($password_new, PASSWORD_BCRYPT);
+    
+        $this->signin_mdl->update_password_user($email, $hashed_password);
 
-        $email = 'marco@casadosparafusosvr.com.br';
-        $password = 'Marco_3101';
-        $name = 'Marco';
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $this->signin_mdl->create_user($email, $hashed_password, $name);
-
-        $email = 'wesllen@casadosparafusosvr.com.br';
-        $password = 'Wesllen_3101';
-        $name = 'Wesllen';
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $this->signin_mdl->create_user($email, $hashed_password, $name);
-        
-        $email = 'matheus@casadosparafusosvr.com.br';
-        $password = 'Matheus_3101';
-        $name = 'Matheus';
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $this->signin_mdl->create_user($email, $hashed_password, $name);
-
-        //
-        
-        $email = 'caixavr@casadosparafusosvr.com.br';
-        $password = 'Caixavr_3101';
-        $name = 'Caixa AP';
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $this->signin_mdl->create_user($email, $hashed_password, $name);
-
-        $email = 'caixaretiro@casadosparafusosvr.com.br';
-        $password = 'Caixaret_3101';
-        $name = 'Caixa Retiro';
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $this->signin_mdl->create_user($email, $hashed_password, $name);
     }
 
     // --------------------------------------------------------------------

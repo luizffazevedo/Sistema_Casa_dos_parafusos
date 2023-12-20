@@ -828,7 +828,7 @@ class Setting_Mdl extends CI_Model {
         $result = $this->db->query($insert);
     }
 
-    public function edit_login($id,$name,$user,$password,$sistem){
+    public function edit_login($id, $name, $user, $password, $sistem){
         $update = "UPDATE login SET name = '$name', user = '$user', password = '$password', sistem = '$sistem' WHERE id = '$id';";
         $result = $this->db->query($update);
     }
