@@ -1,0 +1,129 @@
+.sidebar-custom{
+    font-size: 14px; 
+    background-color: #223127;
+}
+
+.nav-profile{
+    background: white !important;
+    color: rgb(1, 28, 8) !important;
+}
+
+.info small {
+    color: rgb(1, 28, 8) !important;
+}
+
+.nav-header{
+    color:white !important;
+}
+
+.sidebar .sidebar-minify-btn {
+    background: rgb(2, 38, 21) !important;
+    color: white !important;
+}
+
+.sidebar .sidebar-minify-btn:hover {
+    background: white !important;
+    color: rgb(1, 28, 8) !important;
+}
+
+.sidebar .sidebar-minify-btn::selection {
+    background: rgb(2, 38, 21) !important;
+    color: white !important;
+}
+
+.image-logo-top{
+    margin-left: 20px;
+    width: 180px;
+    margin-top: -50px;
+    margin-bottom: 50px;
+}
+
+.sidebar .nav>li>a {
+    color: white;
+}
+.sidebar .nav .sub-menu>li>a {
+    color: rgb(225,225,225);
+}
+
+.sidebar .nav .sub-menu>li>a:hover {
+    color: white;
+}
+
+.hide{
+    display: none;
+}
+
+.circle-chapters{
+    width:25px;
+    height:25px;
+    border-radius:
+    10px;
+    background-color:white;
+    padding:2px;
+    color:black;
+    white-space:
+    nowrap;
+    display:inline;
+    margin-right:5%
+}
+
+@media (max-width:1000px) {
+    .image-logo-top{
+        display: none;  
+    }
+}
+
+.late{
+    color: red !important;
+}
+
+.positive{
+    color: blue !important;
+}
+
+.desabilitado{
+    background: #eee; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+    pointer-events: none;
+    touch-action: none;
+}
+
+.select_multiple_companies{
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    appearance: none; /* Remove the default arrow */
+    background-color: #fff;
+    background-image: linear-gradient(to bottom, #ffffff, #e5e5e5); /* Add a gradient to the background */
+    background-position: right 8px top 50%;
+    background-repeat: no-repeat;
+    background-size: 9px 6px; /* Set the size of the arrow */
+    font-size: 16px;
+    font-weight: bold;
+    outline: none; /* Remove the focus outline */
+}
+
+.floating-message {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top:0;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    z-index: 999;
+  }
+
+.dashbord-card-border{
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px; 
+    background-color:white;
+    margin-bottom: 1%;
+}
+
+.dash-card{
+    padding:0 !important;
+}
+
