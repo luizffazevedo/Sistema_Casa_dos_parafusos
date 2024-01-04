@@ -731,26 +731,12 @@ class Setting_Mdl extends CI_Model {
     }
     
     public function getNote($number=NULL, $emiter=NULL){
-        $select = 
-        "SELECT payment.id as note_id,
-        payment_date.id as payment_id,
-        payment_date.parcel_date,
-        payment_date.parcel_value,
-        payment.destine, 
-        payment.emiter, 
-        payment.id_account, 
-        payment_method.name as method,
-        payment.observation, 
-        payment_status.name as status_name,
-        income 
-        FROM payment 
-        JOIN payment_date 
-            ON payment.id = payment_date.id_payment
-        left join payment_method 
-            on payment.method = payment_method.code
-        join payment_status 
-            on payment_date.status = payment_status.code
-            AND payment.number = $number
+        $select = "SELECT payment.id as note_id, payment_date.id as payment_id, payment_date.parcel_date, payment_date.parcel_value,
+        payment.destine, payment.emiter, payment.id_account, payment_method.name as method,
+        payment.observation, payment_status.name as status_name, income FROM payment JOIN payment_date ON payment.id = payment_date.id_payment
+        left join payment_method on payment.method = payment_method.code
+        join payment_status on payment_date.status = payment_status.code
+        AND payment.number = $number
         where payment.emiter LIKE '$emiter%'";
         $result = $this->db->query($select)->result();
         if ((count($result)) >= 1) {
@@ -828,7 +814,7 @@ class Setting_Mdl extends CI_Model {
         $result = $this->db->query($insert);
     }
 
-    public function edit_login($id, $name, $user, $password, $sistem){
+    public function edit_login($id,$name,$user,$password,$sistem){
         $update = "UPDATE login SET name = '$name', user = '$user', password = '$password', sistem = '$sistem' WHERE id = '$id';";
         $result = $this->db->query($update);
     }
@@ -850,7 +836,7 @@ class Setting_Mdl extends CI_Model {
     }
 
     public function parcel_values_to_receive($year = NULL, $companies = NULL){
-        $formated_year = isset($year) && $year != NULL ? ('AND YEAR(pd.parcel_date) = '. $year) : NULL;
+        $formated_year = isset($year) && $year != NULL ? ('AND YEAR(pd.parcel_date ) = '. $year) : NULL;
         sort($companies);
         $formated_companies = isset($companies) ? ('AND p.id_account IN ('. implode(',', $companies).')') : '';
         $formated_companies_2 = 
@@ -865,9 +851,9 @@ class Setting_Mdl extends CI_Model {
         FROM (
             SELECT MONTH(pd.parcel_date) AS month, YEAR(pd.parcel_date) AS year
             FROM payment_date pd 
-            where YEAR(pd.parcel_date) = 2023
+            WHERE YEAR(pd.parcel_date) = YEAR(CURDATE())
             GROUP BY month
-            ORDER BY year, month
+            ORDER BY year,month 
         ) t1
         LEFT JOIN (
             SELECT MONTH(pd.parcel_date) AS month, YEAR(pd.parcel_date) AS year, COALESCE(SUM(parcel_value),0) AS to_receive
@@ -892,14 +878,14 @@ class Setting_Mdl extends CI_Model {
             FROM payment_date pd 
             LEFT JOIN payment p ON p.id = pd.id_payment
             LEFT JOIN account on p.id_account = account.id
-            WHERE p.income = 1 $formated_companies AND pd.status = 0 AND pd.parcel_date < CURDATE() AND YEAR(pd.parcel_date) = 2023
+            WHERE p.income = 1 $formated_companies AND pd.status = 0 AND pd.parcel_date < CURDATE() AND YEAR(pd.parcel_date) = YEAR(CURDATE())
             GROUP BY month
             ORDER BY year,month
         ) t4 ON t1.month = t4.month
         LEFT JOIN (
             SELECT MONTH(e.payment_date) AS month, YEAR(e.payment_date) AS year, SUM(value) AS expense_value
             FROM expense e 
-            WHERE e.status = 0 AND YEAR(e.payment_date) = 2023
+            WHERE e.status = 0 AND YEAR(e.payment_date) = YEAR(CURDATE())
             GROUP BY month
             ORDER BY year,month
         ) t5 ON t1.month = t5.month 
@@ -933,7 +919,7 @@ class Setting_Mdl extends CI_Model {
                   GROUP by YEAR(pd.parcel_date)
       ) as to_receive_all_time
       LEFT JOIN (
-                  SELECT YEAR(parcel_date) as year, SUM(parcel_value) AS sum_value
+                  SELECT YEAR (parcel_date) as year, SUM(parcel_value) AS sum_value
                   FROM payment_date pd2 
                   LEFT JOIN payment p ON p.id = pd2.id_payment
                   LEFT JOIN account on p.id_account = account.id
@@ -946,7 +932,7 @@ class Setting_Mdl extends CI_Model {
                   FROM payment_date pd3
                   LEFT JOIN payment p ON p.id = pd3.id_payment
                   LEFT JOIN account on p.id_account = account.id
-                  WHERE p.income = 1 $formated_companies AND pd3.status = 0 AND pd3.parcel_date < CURDATE() AND YEAR(pd3.parcel_date) = 2023
+                  WHERE p.income = 1 $formated_companies AND pd3.status = 0 AND pd3.parcel_date < CURDATE() AND YEAR(pd3.parcel_date) = YEAR(CURDATE())
                   GROUP by YEAR(pd3.parcel_date)
       ) as delayed_to_receive
       ON to_receive_all_time.year = delayed_to_receive.year
@@ -954,14 +940,14 @@ class Setting_Mdl extends CI_Model {
                 SELECT YEAR(e.payment_date) as year, SUM(e.value) AS expense_value 
                 FROM expense e 
                 WHERE e.status = 0
-                AND YEAR(e.payment_date) = 2023 GROUP by YEAR(e.payment_date)
+                AND YEAR(e.payment_date) = YEAR(CURDATE()) GROUP by YEAR(e.payment_date)
       ) as expense_to_receive
       ON to_receive_all_time.year = expense_to_receive.year
       LEFT JOIN (
             SELECT MONTH(pr.year_month) as month, YEAR(pr.year_month) as year, sum(value) as sum_value
             FROM prevision_registred as pr
             WHERE accounts = '".implode(',', $companies)."'
-            AND YEAR(pr.year_month) = 2023
+            AND YEAR(pr.year_month) = YEAR(CURDATE())
         ) as prevision_all_time 
        ON to_receive_all_time.year = prevision_all_time.year";
     
@@ -983,16 +969,16 @@ class Setting_Mdl extends CI_Model {
         FROM (
             SELECT MONTH(pd.parcel_date) AS month, YEAR(pd.parcel_date) AS year
             FROM payment_date pd 
-            where YEAR(pd.parcel_date) = 2023
+            where YEAR(pd.parcel_date) =YEAR(CURDATE())
             GROUP BY month
             ORDER BY year, month
         ) t1
         LEFT JOIN (
-            SELECT MONTH(pd.approved_date) AS month, YEAR(pd.approved_date) AS year, COALESCE(SUM(parcel_value),0) AS to_receive
+             SELECT MONTH(pd.approved_date) AS month, YEAR(pd.approved_date) AS year, COALESCE(SUM(parcel_value),0) AS to_receive
             FROM payment_date pd 
             LEFT JOIN payment p ON p.id = pd.id_payment
             LEFT JOIN account on p.id_account = account.id
-            WHERE p.income = 1 $formated_companies AND pd.status = 1 AND pd.approved_date < current_date() AND YEAR(pd.approved_date) = 2023
+            WHERE p.income = 1 $formated_companies AND pd.status = 1 AND pd.approved_date < current_date() AND YEAR(pd.approved_date) = YEAR(CURDATE())
             GROUP BY month
             ORDER BY year, month
         ) t2 ON t1.month = t2.month
@@ -1001,13 +987,13 @@ class Setting_Mdl extends CI_Model {
             FROM payment_date pd 
             LEFT JOIN payment p ON p.id = pd.id_payment
             LEFT JOIN account on p.id_account = account.id
-            WHERE p.income = 0 $formated_companies AND pd.status = 1
+            WHERE p.income = 0 $formated_companies AND pd.status = 1 AND YEAR(pd.parcel_date)= YEAR(CURDATE())
             GROUP BY month
             ORDER BY year, month
         ) t3 ON t1.month = t3.month
         LEFT JOIN (
             SELECT MONTH(pd.parcel_date) AS month, YEAR(pd.parcel_date) AS year, COALESCE(SUM(parcel_value),0) AS received
-            FROM payment_date pd 
+            FROM payment_date AS pd 
             LEFT JOIN payment p ON p.id = pd.id_payment
             LEFT JOIN account on p.id_account = account.id
             WHERE p.income = 1 $formated_companies AND pd.status = 1 AND pd.parcel_date < NOW()
@@ -1017,7 +1003,7 @@ class Setting_Mdl extends CI_Model {
         LEFT JOIN (
             SELECT MONTH(e.approved_date) AS month, YEAR(e.approved_date) AS year, SUM(value) AS expense_value
             FROM expense e 
-            WHERE e.status = 1 AND approved_date != '' AND YEAR(e.approved_date) = 2023
+            WHERE e.status = 1 AND approved_date != '' AND YEAR(e.approved_date) = YEAR(CURDATE()) 
             GROUP BY month
             ORDER BY year,month
         ) t5 ON t1.month = t5.month
@@ -1027,11 +1013,9 @@ class Setting_Mdl extends CI_Model {
             YEAR(insert_date) AS year,
             sum(cash) + sum(pix) + sum(card) as balcony_value 
             FROM balcony_values 
+            WHERE YEAR(insert_date)=YEAR(CURDATE()) 
             GROUP BY MONTH(insert_date)
-        ) t6 ON t1.month = t6.month 
-        ORDER BY 
-        year,
-        month";
+        ) t6 ON t1.month = t6.month ORDER BY year,month";
         return $this->db->query($select_query)->result();
     }
 
