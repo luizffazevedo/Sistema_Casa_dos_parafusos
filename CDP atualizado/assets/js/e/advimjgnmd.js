@@ -1682,12 +1682,12 @@ function preencherModalXML(xml_row){
   numero = xml.find("nNF").text();
   emissor = xml.find("emit").find("xNome").text();
   destino = xml.find("dest").find("xNome").text();
-  //liquido = xml.find("fat").find("vLiq").text();
+  liquido = xml.find("fat").find("vLiq").text();
   formaPagamento = xml.find("tPag").text();
   observacao = xml.find("infAdic").text();
   pagamentos = xml.find("dup");
-  //valores=[];
-  //datasVencimento=[];
+  valores=[];
+  datasVencimento=[];
   $('#payment_div').html('');
   for(let i = 0; i< pagamentos.length; i++){
     $('#payment_div').append(`
@@ -1856,6 +1856,7 @@ function preencherModalRET(ret){
 function fillModalEditNote(number, emiter){
   number = number ? number : $("#number_edit").val();
   emiter = emiter ? emiter : $("#emiter_edit").val();
+  console.log(emiter,number);
   $("#number_edit").val(number);
   $("#emiter_edit").val(emiter);
   $("#payment_div_edit").html('');  
@@ -2011,7 +2012,7 @@ function get_final_total_row(){
       $("#table_to_receive").append(`
       <tr>
         <td>Total:</td>
-        <td class="to_receive_all_time">${result[i].expense_value ? formatToPrice(result[i].to_receive_all_time) : '-'}</td>
+        <td class="to_receive_all_time">${result[i].to_receive_all_time ? formatToPrice(result[i].to_receive_all_time) : '-'}</td>
         <td class="prevision_all_time">${result[i].prevision_all_time ? formatToPrice(result[i].prevision_all_time) : '-'}</td>
         <td class="expense_all_time late">${result[i].expense_value ? formatToPrice(result[i].expense_value): '-'}</td>
         <td class="delay_all_time ${result[i].delayed_to_receive ? 'late' : ''}">${result[i].delayed_to_receive ? formatToPrice(result[i].delayed_to_receive): '-'}</td>
