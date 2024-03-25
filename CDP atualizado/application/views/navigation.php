@@ -86,7 +86,6 @@
                             <?php if ($access_level == 3) : ?>
                                 <li><a href="<?php echo base_url('balcony?tab=box_see&balcony=1&date='.date('Y-m-d'))?>">Barra Mansa</a>
                                 <li><a href="<?php echo base_url('balcony?tab=box_see&balcony=2&date='.date('Y-m-d'))?>">Volta Redonda AM</a>
-                                
                             <?php endif; ?>
                             <?php if ($access_level == 4) : ?>
                             <li><a href="<?php echo base_url('balcony?tab=box_control')?>">Controle de caixa</a>
