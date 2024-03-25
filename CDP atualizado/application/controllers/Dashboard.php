@@ -19,7 +19,7 @@ class Dashboard extends MY_Controller {
         $this->load->model('Dashboard_Mdl', 'dashboard_mdl');
     }
 
-    // --------------------------------------------------------------------
+    // --------------------------------------------------------------------Teste
 
     /**
      * Index method
@@ -30,7 +30,7 @@ class Dashboard extends MY_Controller {
      * @return  void    No value is returned
      */
     public function index() {
-        $this->buffer(array('method' => $this->dashboard_mdl));
+        $this->buffer(array('method' => $this->dashboard_mdl)); 
         $this->render(array('output' => 'dashboard'));
     }
 
@@ -80,5 +80,5 @@ class Dashboard extends MY_Controller {
     
     
 
-    // --------------------------------------------------------------------
+    // --------------------------------------------------------------------Teste
 }
