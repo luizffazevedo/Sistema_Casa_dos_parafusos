@@ -751,7 +751,8 @@ class Setting_Mdl extends CI_Model {
         }
         $this->db->trans_start();
         $update = "UPDATE payment SET emiter = '$emiter', destine = '$destine', observation = $escaped_observation $account 
-        WHERE number = '$number'";
+        WHERE number = '$number' and payment.id = " . $array_to_update[0]['id_payment'];
+        
         $result = $this->db->query($update);
 
         foreach ($array_to_update as $item) {
@@ -987,7 +988,7 @@ class Setting_Mdl extends CI_Model {
             FROM payment_date pd 
             LEFT JOIN payment p ON p.id = pd.id_payment
             LEFT JOIN account on p.id_account = account.id
-            WHERE p.income = 0 $formated_companies AND pd.status = 1 AND YEAR(pd.parcel_date)= YEAR(CURDATE())
+            WHERE p.income = 0 $formated_companies AND pd.status = 1  AND YEAR(pd.parcel_date)= YEAR(CURDATE())
             GROUP BY month
             ORDER BY year, month
         ) t3 ON t1.month = t3.month

@@ -369,7 +369,7 @@
                                     <div class="form-group">
                                     <label for=""><b >Número da nota:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
+                                            <input id="number_edit" placeholder="Número da nota." type="text" name="number" class="form-control" value="">
                                             <input id="payment_id_edit" placeholder="Número do pagamento FK" type="text" name="" class="form-control" value="" hidden>
                                             <input id="payment_note_id_edit" placeholder="Número da nota FK" type="text" name="note_id_edit" class="form-control" value="" hidden>
                                         </div>
@@ -377,7 +377,7 @@
                                     <div class="form-group">
                                         <label for=""><b >Emissor:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input onblur="fillModalEditNote('', '')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
+                                            <input onblur="fillModalEditNote('','')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -579,7 +579,7 @@
                                         filter_input(INPUT_GET, 'account'),
                                         filter_input(INPUT_GET, 'status'),
                                         filter_input(INPUT_GET, 'name'),
-                                        filter_input(INPUT_GET, 'date_init'),
+                                        filter_input(INPUT_GET, 'date_init'), 
                                         filter_input(INPUT_GET, 'date_end') );?>
                                      <?php if(!empty($table_data)) : ?>
                                         <?php foreach ($table_data as $key => $value): ?>
@@ -732,12 +732,13 @@
                                     <label for=""><b >Número da nota:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
                                             <input id="number_edit" placeholder="Número da nota" type="text" name="number" class="form-control" value="">
+                                            <input id="payment_note_id_edit" placeholder="Número da nota FK" type="text" name="note_id_edit" class="form-control" value="" hidden>
                                         </div>
                                     </div>    
                                     <div class="form-group">
                                         <label for=""><b >Emissor:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input onblur="fillModalEditNote('', '')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
+                                            <input onblur="fillModalEditNote('','')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -893,7 +894,7 @@
                                     <div class="form-group">
                                         <label for=""><b >Emissor:</b> <span class="text-danger">*</span></label>
                                         <div class="input-group m-b-10">
-                                            <input onblur="fillModalEditNote('', '')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
+                                            <input onblur="fillModalEditNote('','')" id="emiter_edit" type="text" name="emiter" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="form-group">
